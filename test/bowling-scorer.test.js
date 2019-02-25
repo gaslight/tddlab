@@ -7,5 +7,9 @@ describe('<bowling-scorer>', () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
     expect(el.shadowRoot.innerHTML).to.contain('Score: 0');
   });
+  it('has a text box', async () => {
+    const el = await fixture('<bowling-scorer></bowling-scorer>');
+    expect(el.shadowRoot.querySelector("input")).to.exist;
+  });
 
 });
