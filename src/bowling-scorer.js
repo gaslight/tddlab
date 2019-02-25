@@ -16,6 +16,7 @@ class BowlingScorer extends LitElement {
   render() {
     return html`
       <div>Score: ${this.score}</div>
+      <input name="roll" />
    `;
   }
 }
