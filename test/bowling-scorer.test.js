@@ -11,5 +11,10 @@ describe('<bowling-scorer>', () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
     expect(el.shadowRoot.querySelector("input")).to.exist;
   });
+  it('has a roll button', async () => {
+    const el = await fixture('<bowling-scorer></bowling-scorer>');
+    expect(el.shadowRoot.querySelector("button")).to.exist;
+    expect(el.shadowRoot.querySelector("button").innerHTML).to.eq("Roll!");
+  });
 
 });
