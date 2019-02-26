@@ -1,11 +1,17 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
 import '../src/bowling-scorer';
+import BowlingScorerWrapper from './bowling-scorer-wrapper';
 
 describe('<bowling-scorer>', () => {
-  it('displays an initial score of 0', async () => {
+  let bowlingScoreWrapper;
+
+  beforeEach(async () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
-    expect(el.shadowRoot.innerHTML).to.contain('Score: 0');
+    bowlingScoreWrapper = new BowlingScorerWrapper(el);  
+  });
+  it('displays an initial score of 0', async () => {
+    expect(bowlingScoreWrapper.score).to.eq('0');
   });
   it('has a text box', async () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
@@ -17,22 +23,13 @@ describe('<bowling-scorer>', () => {
     expect(el.shadowRoot.querySelector("button").innerHTML).to.eq("Roll!");
   });
   it('updates the score after a roll', async () => {
-    const el = await fixture('<bowling-scorer></bowling-scorer>');
-    const bowlingScoreWrapper = new BowlingScoreWrapper(el);
     await bowlingScoreWrapper.roll("5");
     expect(bowlingScoreWrapper.score).to.eq('5');
   });
   it('calculates score after a roll', async () => {
-    const el = await fixture('<bowling-scorer></bowling-scorer>');
-    const input = el.shadowRoot.querySelector("input");
-    input.value = 5;
-    const rollButton = el.shadowRoot.querySelector("button");
-    rollButton.click();
-    await el.updateComplete;
-    input.value = 3;
-    rollButton.click();
-    await el.updateComplete;
-    expect(el.shadowRoot.innerHTML).to.include('Score: 8');
+    await bowlingScoreWrapper.roll("5");
+    await bowlingScoreWrapper.roll("3");
+    expect(bowlingScoreWrapper.score).to.eq('8');
   });
 
 });
