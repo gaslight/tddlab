@@ -23,6 +23,7 @@ class BowlingScorer extends LitElement {
 
   onRoll(event) {
     console.log('on roll', event);
+    this.score = this.shadowRoot.querySelector("input").value;
   }
 }
 
