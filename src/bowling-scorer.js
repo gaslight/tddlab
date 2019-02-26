@@ -11,6 +11,7 @@ class BowlingScorer extends LitElement {
   constructor() {
     super();
     this.score = 0;
+    this.rolls = [];
   }
 
   render() {
@@ -23,7 +24,8 @@ class BowlingScorer extends LitElement {
 
   onRoll(event) {
     console.log('on roll', event);
-    this.score = this.shadowRoot.querySelector("input").value;
+    this.rolls.push(this.shadowRoot.querySelector("input").value);
+    this.score = this.rolls.reduce((total, roll) => total + Number(roll), 0);
   }
 }
 
