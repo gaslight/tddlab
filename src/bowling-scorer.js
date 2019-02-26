@@ -17,8 +17,12 @@ class BowlingScorer extends LitElement {
     return html`
       <div>Score: ${this.score}</div>
       <input name="roll" />
-      <button>Roll!</button>
+      <button @click=${this.onRoll}>Roll!</button>
    `;
+  }
+
+  onRoll(event) {
+    console.log('on roll', event);
   }
 }
 
