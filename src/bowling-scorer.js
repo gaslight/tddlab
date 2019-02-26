@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-import { openWc } from './open-wc-logo';
+import calculateScore from './calculate-score';
 
 class BowlingScorer extends LitElement {
   static get properties() {
@@ -23,9 +23,8 @@ class BowlingScorer extends LitElement {
   }
 
   onRoll(event) {
-    console.log('on roll', event);
-    this.rolls.push(this.shadowRoot.querySelector("input").value);
-    this.score = this.rolls.reduce((total, roll) => total + Number(roll), 0);
+    this.rolls.push(Number(this.shadowRoot.querySelector("input").value));
+    this.score = calculateScore(this.rolls);
   }
 }
 
