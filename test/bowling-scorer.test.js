@@ -18,12 +18,9 @@ describe('<bowling-scorer>', () => {
   });
   it('updates the score after a roll', async () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
-    const input = el.shadowRoot.querySelector("input");
-    input.value = 5;
-    const rollButton = el.shadowRoot.querySelector("button");
-    rollButton.click();
-    await el.updateComplete;
-    expect(el.shadowRoot.innerHTML).to.include('Score: 5');
+    const bowlingScoreWrapper = new BowlingScoreWrapper(el);
+    await bowlingScoreWrapper.roll("5");
+    expect(bowlingScoreWrapper.score).to.eq('5');
   });
   it('calculates score after a roll', async () => {
     const el = await fixture('<bowling-scorer></bowling-scorer>');
