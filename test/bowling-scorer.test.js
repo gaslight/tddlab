@@ -25,5 +25,17 @@ describe('<bowling-scorer>', () => {
     await el.updateComplete;
     expect(el.shadowRoot.innerHTML).to.include('Score: 5');
   });
+  it('calculates score after a roll', async () => {
+    const el = await fixture('<bowling-scorer></bowling-scorer>');
+    const input = el.shadowRoot.querySelector("input");
+    input.value = 5;
+    const rollButton = el.shadowRoot.querySelector("button");
+    rollButton.click();
+    await el.updateComplete;
+    input.value = 3;
+    rollButton.click();
+    await el.updateComplete;
+    expect(el.shadowRoot.innerHTML).to.include('Score: 8');
+  });
 
 });
